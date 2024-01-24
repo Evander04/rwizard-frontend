@@ -1,8 +1,9 @@
 'use client'
-import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
+import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Spacer } from "@nextui-org/react";
 import { FC, useState } from "react";
 import { LogoApp } from "../logo";
 import { ThemeSwitcher } from "../themeSwitcher";
+import { GithubIcon } from "../icons";
 
 interface Props {
     children: React.ReactNode;    
@@ -32,7 +33,8 @@ export const MainLayout: FC<Props> = ({children}) => {
                         className="sm:hidden"
                     />
                     <NavbarBrand>
-                        <LogoApp/>
+                        <GithubIcon/>
+                        <Spacer x={1}/>
                         <p className="font-bold text-inherit">RWIZARD</p>
                     </NavbarBrand>
                 </NavbarContent>                
