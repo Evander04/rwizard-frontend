@@ -40,8 +40,8 @@ export const MainLayout: FC<Props> = ({children}) => {
                 </NavbarContent>                
                 <NavbarContent className="hidden sm:flex gap-4" justify="center">
                     <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Features
+                    <Link color="foreground" href="/person">
+                        Person
                     </Link>
                     </NavbarItem>
                     <NavbarItem isActive>
@@ -82,7 +82,9 @@ export const MainLayout: FC<Props> = ({children}) => {
                     ))}
                 </NavbarMenu>            
             </Navbar>     
-            {children}
+            <div className="container m-auto">
+                {children}
+            </div>
         </>
     )
 }
