@@ -5,8 +5,8 @@ export async function findAllPerson() {
         const params = {
             method:"GET",
             headers:{
-                "Content-Type":"application/json",
-                Authorization:`${process.env.AUTH_TOKEN}`,
+                "Content-Type":"application/json",            
+                "Authorization":`${process.env.AUTH_TOKEN}`,
             },            
         };
 
@@ -28,7 +28,7 @@ export async function findPerson(body:object) {
             method:"POST",            
             headers:{
                 "Content-Type":"application/json",
-                Authorization:`${process.env.AUTH_TOKEN}`,
+                "Authorization":`${process.env.AUTH_TOKEN}`,
             },          
             body:JSON.stringify(body)  
         };

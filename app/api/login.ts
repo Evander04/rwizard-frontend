@@ -1,7 +1,6 @@
-export async function login(formData:any) {
+export async function loginWS(formData:any) {
     try {        
-        const url = `${process.env.REMOTE_HOST}/signin`;
-
+        const url = `${process.env.HOST}${process.env.CONTROLLER_AUTH}/signin`;
         const params = {
             method:"POST",
             headers:{

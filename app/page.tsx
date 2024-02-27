@@ -1,9 +1,6 @@
-'use client'
 import { Button } from '@nextui-org/react'
-import { useState } from 'react'
 
-export default function Home() {
-  const [test,setTest]=useState("");
+export default function Home() {  
   return (
     <div>
       <Button color='primary'>click me</Button>

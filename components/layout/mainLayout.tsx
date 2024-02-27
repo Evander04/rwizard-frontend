@@ -1,7 +1,6 @@
 'use client'
 import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Spacer } from "@nextui-org/react";
 import { FC, useState } from "react";
-import { LogoApp } from "../logo";
 import { ThemeSwitcher } from "../themeSwitcher";
 import { GithubIcon } from "../icons";
 
