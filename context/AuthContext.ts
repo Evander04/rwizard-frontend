@@ -4,9 +4,7 @@ import {
 
 
 const AuthContext = createContext({
-    token:undefined,
-    username:undefined,
-    role:undefined,
+    auth:undefined,
     logIn:(user: any) => null,
     signOut:() => null
 });

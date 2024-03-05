@@ -4,13 +4,27 @@ import AuthContext from '@/context/AuthContext';
 import {NextUIProvider} from '@nextui-org/react'
 import {ThemeProvider as NextThemesProvider} from "next-themes";
 import Router from 'next/router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Login from './login/page';
-import { setSession, setToken } from '@/context/storage';
+import { getSession, getToken, setSession, setToken } from '@/context/storage';
 
 export function Providers({children}: { children: React.ReactNode }) {
   const [auth, setAuth] = useState<any>(undefined);
-  
+  //Update context
+	useEffect(() => {				
+		(async () => {
+			const token = await getToken()
+			const session= await getSession()			
+			if(token) {
+				setAuth({
+					token,
+					session					
+				})
+			} else {
+				setAuth(null);
+			}
+		})();
+	}, []);
   const logIn = (session:any) => {
 		
 		//tokens
@@ -18,7 +32,7 @@ export function Providers({children}: { children: React.ReactNode }) {
 
 		//local storage
 		setToken(tokenUser)
-		setSession(session)		
+		setSession(JSON.stringify(session))		
 
 		//Update State
 		setAuth({
@@ -37,7 +51,7 @@ export function Providers({children}: { children: React.ReactNode }) {
 		}
 	}
 
-  //Store and update component
+    //Store and update component
 	const authData:any = useMemo(
 		() => ({
 			auth,

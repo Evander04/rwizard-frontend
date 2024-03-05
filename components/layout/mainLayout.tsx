@@ -1,28 +1,38 @@
 'use client'
-import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Spacer } from "@nextui-org/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Spacer } from "@nextui-org/react";
 import { FC, useState } from "react";
 import { ThemeSwitcher } from "../themeSwitcher";
-import { GithubIcon } from "../icons";
+import { ChrevonDown, GithubIcon } from "../icons";
+import { useRouter } from "next/navigation";
 
 interface Props {
     children: React.ReactNode;    
 }
 const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    {
+        id:1,
+        title:"Settings",
+        items:[
+            {
+                title:"Person",
+                description:"Add, Edit, Remove any person in the system",
+                url:"/person",
+            },
+            {
+                title:"Person",
+                url:"/person",                
+            },            
+            {
+                title:"Person",
+                url:"/person",                
+            }
+        ]
+    },   
 ];
-
 export const MainLayout: FC<Props> = ({children}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+    const router= useRouter()
+
     return (
         <>
             <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -38,47 +48,84 @@ export const MainLayout: FC<Props> = ({children}) => {
                     </NavbarBrand>
                 </NavbarContent>                
                 <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                    <NavbarItem>
-                    <Link color="foreground" href="/person">
-                        Person
-                    </Link>
-                    </NavbarItem>
-                    <NavbarItem isActive>
-                    <Link href="#" aria-current="page">
-                        Customers
-                    </Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Integrations
-                    </Link>
-                    </NavbarItem>
+                    {menuItems.map((item:any, index:number) => (
+                        <Dropdown key={index}>                        
+                            <NavbarItem>
+                            <DropdownTrigger>
+                            <Button
+                                disableRipple
+                                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                                endContent={<ChrevonDown fill="currentColor" size={16}/>}
+                                radius="sm"
+                                variant="light"
+                            >
+                                {item.title}
+                            </Button>
+                            </DropdownTrigger>
+                            </NavbarItem>                                                    
+                            <DropdownMenu
+                                aria-label="menu"                                
+                                itemClasses={{
+                                base: "gap-4",
+                                }}
+                            >
+                                {item.items.map((subItem:any,subIndex:number)=>(
+                                    <DropdownItem
+                                    onPress={()=>{router.push(subItem.url)}}
+                                    key={subIndex}
+                                    description={subItem.description}
+                                    >
+                                    {subItem.title}
+                                    </DropdownItem>
+                                ))}                                
+                            </DropdownMenu>
+                        </Dropdown>                        
+                    ))}                                        
                 </NavbarContent>
                 <NavbarContent justify="end">
                     <NavbarItem className="hidden lg:flex">
                     <ThemeSwitcher/>
                     </NavbarItem>
                     <NavbarItem>
-                    <Button as={Link} color="primary" href="#" variant="flat">
-                        Sign Up
+                    <Button as={Link} color="danger" href="#" variant="ghost">
+                        Sign out
                     </Button>
                     </NavbarItem>
                 </NavbarContent>
                 <NavbarMenu>
-                    {menuItems.map((item:string, index:number) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                        color={
-                            index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-                        }
-                        className="w-full"
-                        href="#"
-                        size="lg"
-                        >
-                        {item}
-                        </Link>
-                    </NavbarMenuItem>
-                    ))}
+                {menuItems.map((item:any, index:number) => (
+                        <Dropdown key={index}>                        
+                            <NavbarItem>
+                            <DropdownTrigger>
+                            <Button
+                                disableRipple
+                                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                                endContent={<ChrevonDown fill="currentColor" size={16}/>}
+                                radius="sm"
+                                variant="light"
+                            >
+                                {item.title}
+                            </Button>
+                            </DropdownTrigger>
+                            </NavbarItem>                                                    
+                            <DropdownMenu
+                                aria-label="menu"                                
+                                itemClasses={{
+                                base: "gap-4",
+                                }}
+                            >
+                                {item.items.map((subItem:any,subIndex:number)=>(
+                                    <DropdownItem
+                                    key={subIndex}
+                                    description={subItem.description}
+                                    onPress={()=>{router.push(subItem.url)}}
+                                    >
+                                    {subItem.title}
+                                    </DropdownItem>
+                                ))}                                
+                            </DropdownMenu>
+                        </Dropdown>                        
+                    ))}      
                 </NavbarMenu>            
             </Navbar>     
             <div className="container m-auto">

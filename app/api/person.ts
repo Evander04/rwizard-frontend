@@ -1,4 +1,4 @@
-export async function findAllPerson() {
+export async function findAllPerson(auth:any) {
     try {        
         const url = `${process.env.HOST}${process.env.CONTROLLER_PERSON}/findAll`;
 
@@ -6,7 +6,7 @@ export async function findAllPerson() {
             method:"GET",
             headers:{
                 "Content-Type":"application/json",            
-                "Authorization":`${process.env.AUTH_TOKEN}`,
+                "Authorization":auth.token,
             },            
         };
 
@@ -20,7 +20,7 @@ export async function findAllPerson() {
     }
 }
 
-export async function findPerson(body:object) {
+export async function findPerson(body:object,token:any) {
     try {        
         const url = `${process.env.HOST}${process.env.CONTROLLER_PERSON}/find`;
 
@@ -28,7 +28,7 @@ export async function findPerson(body:object) {
             method:"POST",            
             headers:{
                 "Content-Type":"application/json",
-                "Authorization":`${process.env.AUTH_TOKEN}`,
+                "Authorization":token,
             },          
             body:JSON.stringify(body)  
         };

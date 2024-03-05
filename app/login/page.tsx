@@ -3,7 +3,7 @@
 import { Button, Card, CardBody, CardFooter, CardHeader, Divider, Image, Input } from "@nextui-org/react";
 import { FC, useState } from "react";
 import { loginWS } from "../api/login";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/hooks/useAuthToken";
 
 
 const Login: FC = ()=>{
@@ -15,11 +15,8 @@ const Login: FC = ()=>{
     const json={
       'email':email,
       'password':password
-    }
-    console.log("body=>",json);    
-    const response = await loginWS(json)
-    console.log("response=>",response);
-    
+    }    
+    const response = await loginWS(json)     
     logIn(response)
   }
   return (
