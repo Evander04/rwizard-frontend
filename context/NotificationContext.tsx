@@ -21,14 +21,14 @@ interface Props {
 }
 
 export const NotificationProvider: React.FC<Props> = ({ children }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
   const [message, setMessage] = useState('');
   const [type, setType] = useState<NotificationType>('info');
 
   const showNotification = (message: string,type:NotificationType) => {
     setMessage(message);
     setType(type);
-    setIsVisible(true);
+    setIsNotificationVisible(true);
   };
 
   const value: NotificationContextType = {
@@ -37,11 +37,11 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <NotificationContext.Provider value={value}>
-        {isVisible && (
+        {isNotificationVisible && (
             <Notification            
             type={type}
             message={message}
-            onClose={()=>setIsVisible(false)}
+            onClose={()=>setIsNotificationVisible(false)}
             />
         )}        
         {children}

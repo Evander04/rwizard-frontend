@@ -59,7 +59,7 @@ const ModalNewPerson: FC<Props>=({personObj,bindings})=>{
     const handleSave = async (onClose:Function) => {
         setLoading(true)
         if(invalid){
-            showNotification("Please complete all require fields",'success')            
+            showNotification("Please complete all require fields la reputa que te pario ",'info')            
         }
         else{
             let body:PersonType ={
