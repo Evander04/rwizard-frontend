@@ -40,11 +40,12 @@ export type UserType= {
 }
 
 export type PersonType = {
-  id: number;
+  id?: number;
   firstName: string;
   middleName: string;
   lastName: string;
   dob: Date;
-  address: null | string;
-  users: UserType[];
+  phone: string;
+  address: string;
+  users?: UserType[];
 }

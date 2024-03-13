@@ -1,3 +1,5 @@
+import { PersonType } from "@/types";
+
 export async function findAllPerson(auth:any) {
     try {        
         const url = `${process.env.HOST}${process.env.CONTROLLER_PERSON}/findAll`;
@@ -20,7 +22,7 @@ export async function findAllPerson(auth:any) {
     }
 }
 
-export async function findPerson(body:object,token:any) {
+export async function findPerson(body:object,auth:any) {
     try {        
         const url = `${process.env.HOST}${process.env.CONTROLLER_PERSON}/find`;
 
@@ -28,7 +30,30 @@ export async function findPerson(body:object,token:any) {
             method:"POST",            
             headers:{
                 "Content-Type":"application/json",
-                "Authorization":token,
+                "Authorization":auth.token,
+            },          
+            body:JSON.stringify(body)  
+        };
+
+        const response = await fetch(url, params);
+        const results = await response.json();
+        return results;
+
+    } catch (error) {
+        console.log("login error=>",error);    
+        return undefined;
+    }
+}
+
+export async function savePerson(body:PersonType,auth:any) {
+    try {        
+        const url = `${process.env.HOST}${process.env.CONTROLLER_PERSON}/save`;
+
+        const params = {
+            method:"POST",            
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":auth.token,
             },          
             body:JSON.stringify(body)  
         };
