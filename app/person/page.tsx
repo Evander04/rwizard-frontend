@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react"
 import { findAllPerson, findPerson } from "../api/person"
 import TableUI from "@/components/tableUI"
-import { PersonType } from "@/types"
+import { PersonType } from "@/types/apiTypes"
 import useAuthToken from "@/hooks/useAuthToken"
 import { UseDateFormat } from "@/hooks/useDate"
 import { Button, useDisclosure } from "@nextui-org/react"

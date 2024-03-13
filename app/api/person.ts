@@ -1,4 +1,4 @@
-import { PersonType } from "@/types";
+import { PersonType } from "@/types/apiTypes";
 
 export async function findAllPerson(auth:any) {
     try {        

@@ -1,9 +1,10 @@
 import { UseDateInput } from "@/hooks/useDate";
-import { PersonType } from "@/types";
+import { PersonType } from "@/types/apiTypes";
 import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner } from "@nextui-org/react";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { savePerson } from "../api/person";
 import useAuthToken from "@/hooks/useAuthToken";
+import { useNotification } from "@/context/NotificationContext";
 
 interface Props {
     personObj:PersonType | undefined;
@@ -23,6 +24,10 @@ const ModalNewPerson: FC<Props>=({personObj,bindings})=>{
     const invalid = useMemo(()=>{
         return firstName==="" || lastName==="" || dob===""
     },[firstName,lastName,dob])
+
+
+    //notification
+    const { showNotification } = useNotification();
 
     const [loading,setLoading] = useState<boolean>(false)
 
@@ -54,7 +59,7 @@ const ModalNewPerson: FC<Props>=({personObj,bindings})=>{
     const handleSave = async (onClose:Function) => {
         setLoading(true)
         if(invalid){
-            console.log("complete the form");            
+            showNotification("Please complete all require fields",'success')            
         }
         else{
             let body:PersonType ={

@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Login from './login/page';
 import { getSession, getToken, setSession, setToken } from '@/context/storage';
+import { NotificationProvider } from '@/context/NotificationContext';
 
 export function Providers({children}: { children: React.ReactNode }) {
   const [auth, setAuth] = useState<any>(undefined);
@@ -64,11 +65,13 @@ export function Providers({children}: { children: React.ReactNode }) {
     <AuthContext.Provider value={authData}>
       <NextUIProvider>
         <NextThemesProvider attribute="class" defaultTheme="dark">
-          {auth ? 
-            children
-            :
-            <Login/>
-          }
+          <NotificationProvider>
+			{auth ? 
+				children
+				:
+				<Login/>
+			}
+		  </NotificationProvider>
         </NextThemesProvider>
       </NextUIProvider>
     </AuthContext.Provider>   
