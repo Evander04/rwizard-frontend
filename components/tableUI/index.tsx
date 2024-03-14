@@ -11,7 +11,7 @@ interface Props {
    pagePagination?:number;   
    onChangePage?:any;
    onChangeRowPerPage?:any;
-   onSortPagination?:any;
+   onSortPagination?:any;   
 }
 
 const TableUI: FC<Props>=({rows,columns,title,headerComponent,pagination,totalRows,pagePagination,onChangePage,onChangeRowPerPage,onSortPagination})=> {       
@@ -64,9 +64,9 @@ const TableUI: FC<Props>=({rows,columns,title,headerComponent,pagination,totalRo
                 topContentPlacement="inside"
                 onSortChange={onSort}     
                 topContent={
-                    <div className="relative flex justify-end">
+                    <div className="relative flex justify-between items-end">                        
                         {headerComponent}
-                    </div>                  
+                    </div>                      
                 }
                 bottomContent={
                     <div className="flex w-full items-center justify-center gap-3">                        
